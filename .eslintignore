@@ -5,3 +5,6 @@ public/
 **/*.min.js
 *.config.js
 .*lintrc.js
+
+.storybook
+stories
