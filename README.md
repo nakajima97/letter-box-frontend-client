@@ -1,46 +1,36 @@
-# Getting Started with Create React App
+# アプリ概要
+## Letter Boxについて
+顧客が気軽に従業員に感謝を伝えることができるアプリ。  
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 本リポジトリについて
+本リポジトリはフロントエンドのみを担当。  
 
-## Available Scripts
+フロントエンドは客側と管理画面の2つに分かれる。
+本リポジトリは「客側」。  
 
-In the project directory, you can run:
+LetteBoxで用いる他のリポジトリは以下の通り。  
 
-### `yarn start`
+### バックエンド
+https://github.com/yudai-nakajima/letter-box-backend
+### 管理画面
+未開発
+### API仕様書
+https://github.com/yudai-nakajima/letter-box-api
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# 作成目的
+「接客態度、気持ちよかったから感謝伝えたいな」と思っても、  
+連絡手段が電話や問い合わせフォームしかないことが多い。  
+それらを使って伝えるのは仰々しいと思い感謝の気持ちを伝えれないことが多い。  
+気軽に伝える手段があると良いなと思い開発。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# 使用技術
+※本リポジトリで利用している技術のみ記述
+- React
+- Typescript
+- ESLint
+- Prettier
+- Material UI
+- React-Router-Dom
 
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# 機能一覧
+- メッセージ送信機能
