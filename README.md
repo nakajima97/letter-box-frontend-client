@@ -30,6 +30,7 @@ https://github.com/yudai-nakajima/letter-box-api
 - ESLint
 - Prettier
 - Material UI
+- Emotion
 - React-Router-Dom
 
 # 機能一覧
