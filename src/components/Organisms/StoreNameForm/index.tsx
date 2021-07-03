@@ -13,28 +13,26 @@ interface FilmOptionType {
   id: number;
 }
 
-const index: FC = () => {
-  const defaultProps = {
-    options: stores,
-    getOptionLabel: (option: FilmOptionType) => option.name,
-  };
-
-  return (
-    <Autocomplete
-      // eslint-disable-next-line
-      {...defaultProps}
-      id="disable-close-on-select"
-      disableCloseOnSelect
-      renderInput={(params) => (
-        <TextField
-          // eslint-disable-next-line
-          {...params}
-          label="店名"
-          variant="standard"
-        />
-      )}
-    />
-  );
+const defaultProps = {
+  options: stores,
+  getOptionLabel: (option: FilmOptionType) => option.name,
 };
+
+const index: FC = () => (
+  <Autocomplete
+    // eslint-disable-next-line
+    {...defaultProps}
+    id="disable-close-on-select"
+    disableCloseOnSelect
+    renderInput={(params) => (
+      <TextField
+        // eslint-disable-next-line
+        {...params}
+        label="店名"
+        variant="standard"
+      />
+    )}
+  />
+);
 
 export default index;
