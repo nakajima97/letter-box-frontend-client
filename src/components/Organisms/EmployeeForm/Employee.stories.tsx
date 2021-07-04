@@ -6,4 +6,4 @@ export default {
   title: 'molecules/EmployeeForm',
 };
 
-export const Default: FC = () => <Index />;
+export const Default: FC = () => <Index hasSelectedStore />;

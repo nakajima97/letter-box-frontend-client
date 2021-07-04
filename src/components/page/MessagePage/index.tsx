@@ -1,11 +1,18 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import MessageTemplate from '../../template/MessageTemplate';
 
-const index: FC = () => (
-  <>
-    <MessageTemplate />
-  </>
-);
+const Index: FC = () => {
+  const [hasSelectedStore, setHasSelectedStore] = useState(false);
 
-export default index;
+  return (
+    <>
+      <MessageTemplate
+        hasSelectedStore={hasSelectedStore}
+        setHasSelectedStore={setHasSelectedStore}
+      />
+    </>
+  );
+};
+
+export default Index;

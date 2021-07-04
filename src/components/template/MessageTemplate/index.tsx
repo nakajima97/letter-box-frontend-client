@@ -8,6 +8,11 @@ import EmployeeForm from '../../Organisms/EmployeeForm';
 import MessageForm from '../../Organisms/MessageForm';
 import Submit from '../../Organisms/Submit';
 
+type Props = {
+  hasSelectedStore: boolean;
+  setHasSelectedStore: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
 const header = css`
   width: 100%;
 `;
@@ -22,17 +27,17 @@ const container = css`
   gap: 10px;
 `;
 
-const index: FC = () => (
+const index: FC<Props> = ({ setHasSelectedStore, hasSelectedStore }) => (
   <>
     <header css={header}>
       <Header />
     </header>
     <main css={container}>
       <div>
-        <StoreNameForm />
+        <StoreNameForm setHasSelectedStore={setHasSelectedStore} />
       </div>
       <div>
-        <EmployeeForm />
+        <EmployeeForm hasSelectedStore={hasSelectedStore} />
       </div>
       <div>
         <MessageForm />

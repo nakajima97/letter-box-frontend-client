@@ -8,6 +8,10 @@ const stores = [
   { name: '山田 三郎', storeId: 1, employeeId: 3 },
 ];
 
+type Props = {
+  hasSelectedStore: boolean;
+};
+
 type FilmOptionType = {
   name: string;
   storeId: number;
@@ -19,7 +23,7 @@ const defaultProps = {
   getOptionLabel: (option: FilmOptionType) => option.name,
 };
 
-const index: FC = () => (
+const index: FC<Props> = ({ hasSelectedStore }) => (
   <Autocomplete
     // eslint-disable-next-line
     {...defaultProps}
@@ -33,6 +37,7 @@ const index: FC = () => (
         variant="standard"
       />
     )}
+    disabled={!hasSelectedStore}
   />
 );
 

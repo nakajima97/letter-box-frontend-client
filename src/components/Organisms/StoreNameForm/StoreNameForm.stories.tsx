@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Index from '.';
 
 export default {
@@ -6,4 +6,9 @@ export default {
   title: 'molecules/StoreNameForm',
 };
 
-export const Default: FC = () => <Index />;
+export const Default: FC = () => {
+  // eslint-disable-next-line
+  const [hasSelectedStore, setHasSelectedStore] = useState(false);
+
+  return <Index setHasSelectedStore={setHasSelectedStore} />;
+};
