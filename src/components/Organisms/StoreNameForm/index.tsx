@@ -13,7 +13,6 @@ type apiResponse = {
 };
 
 const Index: FC = () => {
-  // eslint-disable-next-line
   const [stores, setStores] = useState<storeType[] | null>(null);
 
   useEffect(() => {
