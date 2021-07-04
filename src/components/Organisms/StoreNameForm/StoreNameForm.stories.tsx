@@ -8,7 +8,7 @@ export default {
 
 export const Default: FC = () => {
   // eslint-disable-next-line
-  const [hasSelectedStore, setHasSelectedStore] = useState(false);
+  const [selectedStoreId, setSelectedStoreId] = useState(1);
 
-  return <Index setHasSelectedStore={setHasSelectedStore} />;
+  return <Index setSelectedStoreId={setSelectedStoreId} />;
 };

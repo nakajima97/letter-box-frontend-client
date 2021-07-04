@@ -4,7 +4,7 @@ import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
 
 type Props = {
-  setHasSelectedStore: React.Dispatch<React.SetStateAction<boolean>>;
+  setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type storeType = {
@@ -16,7 +16,7 @@ type apiResponse = {
   data: storeType[];
 };
 
-const Index: FC<Props> = ({ setHasSelectedStore }) => {
+const Index: FC<Props> = ({ setSelectedStoreId }) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
 
   useEffect(() => {
@@ -41,7 +41,9 @@ const Index: FC<Props> = ({ setHasSelectedStore }) => {
             variant="standard"
           />
         )}
-        onChange={() => setHasSelectedStore(true)}
+        onChange={(event, value) =>
+          setSelectedStoreId(value === null ? NaN : value.id)
+        }
       />
     )
   );

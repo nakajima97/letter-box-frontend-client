@@ -3,13 +3,13 @@ import { FC, useState } from 'react';
 import MessageTemplate from '../../template/MessageTemplate';
 
 const Index: FC = () => {
-  const [hasSelectedStore, setHasSelectedStore] = useState(false);
+  const [selectedStoreId, setSelectedStoreId] = useState(NaN);
 
   return (
     <>
       <MessageTemplate
-        hasSelectedStore={hasSelectedStore}
-        setHasSelectedStore={setHasSelectedStore}
+        selectedStoreId={selectedStoreId}
+        setSelectedStoreId={setSelectedStoreId}
       />
     </>
   );

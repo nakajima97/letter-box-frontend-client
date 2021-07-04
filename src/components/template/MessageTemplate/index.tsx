@@ -9,8 +9,8 @@ import MessageForm from '../../Organisms/MessageForm';
 import Submit from '../../Organisms/Submit';
 
 type Props = {
-  hasSelectedStore: boolean;
-  setHasSelectedStore: React.Dispatch<React.SetStateAction<boolean>>;
+  selectedStoreId: number;
+  setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const header = css`
@@ -27,17 +27,17 @@ const container = css`
   gap: 10px;
 `;
 
-const index: FC<Props> = ({ setHasSelectedStore, hasSelectedStore }) => (
+const index: FC<Props> = ({ setSelectedStoreId, selectedStoreId }) => (
   <>
     <header css={header}>
       <Header />
     </header>
     <main css={container}>
       <div>
-        <StoreNameForm setHasSelectedStore={setHasSelectedStore} />
+        <StoreNameForm setSelectedStoreId={setSelectedStoreId} />
       </div>
       <div>
-        <EmployeeForm hasSelectedStore={hasSelectedStore} />
+        <EmployeeForm selectedStoreId={selectedStoreId} />
       </div>
       <div>
         <MessageForm />
