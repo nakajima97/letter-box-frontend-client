@@ -3,6 +3,10 @@ import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
 
+type Props = {
+  setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
+};
+
 type storeType = {
   name: string;
   id: number;
@@ -12,7 +16,7 @@ type apiResponse = {
   data: storeType[];
 };
 
-const Index: FC = () => {
+const Index: FC<Props> = ({ setSelectedStoreId }) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
 
   useEffect(() => {
@@ -37,6 +41,9 @@ const Index: FC = () => {
             variant="standard"
           />
         )}
+        onChange={(event, value) =>
+          setSelectedStoreId(value === null ? NaN : value.id)
+        }
       />
     )
   );

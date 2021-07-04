@@ -8,6 +8,11 @@ import EmployeeForm from '../../Organisms/EmployeeForm';
 import MessageForm from '../../Organisms/MessageForm';
 import Submit from '../../Organisms/Submit';
 
+type Props = {
+  selectedStoreId: number;
+  setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
+};
+
 const header = css`
   width: 100%;
 `;
@@ -22,17 +27,17 @@ const container = css`
   gap: 10px;
 `;
 
-const index: FC = () => (
+const index: FC<Props> = ({ setSelectedStoreId, selectedStoreId }) => (
   <>
     <header css={header}>
       <Header />
     </header>
     <main css={container}>
       <div>
-        <StoreNameForm />
+        <StoreNameForm setSelectedStoreId={setSelectedStoreId} />
       </div>
       <div>
-        <EmployeeForm />
+        <EmployeeForm selectedStoreId={selectedStoreId} />
       </div>
       <div>
         <MessageForm />
