@@ -22,17 +22,13 @@ const container = css`
   gap: 10px;
 `;
 
-const StoreNameFormStyle = css`
-  width: 100%;
-`;
-
 const index: FC = () => (
   <>
     <header css={header}>
       <Header />
     </header>
     <main css={container}>
-      <div css={StoreNameFormStyle}>
+      <div>
         <StoreNameForm />
       </div>
       <div>

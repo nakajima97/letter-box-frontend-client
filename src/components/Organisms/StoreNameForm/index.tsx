@@ -1,38 +1,46 @@
-import { FC } from 'react';
+import { FC, useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
+import axios from 'axios';
 
-const stores = [
-  { name: 'The Shawshank Redemption', id: 1994 },
-  { name: 'The Godfather', id: 1972 },
-  { name: 'The Godfather: Part II', id: 1974 },
-];
-
-interface FilmOptionType {
+type storeType = {
   name: string;
   id: number;
-}
-
-const defaultProps = {
-  options: stores,
-  getOptionLabel: (option: FilmOptionType) => option.name,
 };
 
-const index: FC = () => (
-  <Autocomplete
-    // eslint-disable-next-line
-    {...defaultProps}
-    id="disable-close-on-select"
-    disableCloseOnSelect
-    renderInput={(params) => (
-      <TextField
-        // eslint-disable-next-line
-        {...params}
-        label="店名"
-        variant="standard"
-      />
-    )}
-  />
-);
+type apiResponse = {
+  data: storeType[];
+};
 
-export default index;
+const Index: FC = () => {
+  // eslint-disable-next-line
+  const [stores, setStores] = useState<storeType[] | null>(null);
+
+  useEffect(() => {
+    axios
+      .get<apiResponse>(`http://localhost:3000/api/v1/stores?count=50`)
+      .then((res) => setStores(res.data.data))
+      // eslint-disable-next-line
+      .catch((error) => console.log(error));
+  }, []);
+
+  return (
+    stores && (
+      <Autocomplete
+        options={stores}
+        id="disable-close-on-select"
+        getOptionLabel={(option) => option.name}
+        renderInput={(params) => (
+          <TextField
+            // eslint-disable-next-line
+            {...params}
+            label="店名"
+            variant="standard"
+          />
+        )}
+      />
+    )
+  );
+};
+
+export default Index;
