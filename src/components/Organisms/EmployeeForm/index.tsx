@@ -8,11 +8,11 @@ const stores = [
   { name: '山田 三郎', storeId: 1, employeeId: 3 },
 ];
 
-interface FilmOptionType {
+type FilmOptionType = {
   name: string;
   storeId: number;
   employeeId: number;
-}
+};
 
 const defaultProps = {
   options: stores,
