@@ -7,12 +7,17 @@ import StoreNameForm from '../../Organisms/StoreNameForm';
 import EmployeeForm from '../../Organisms/EmployeeForm';
 import MessageForm from '../../Organisms/MessageForm';
 import Submit from '../../Organisms/Submit';
+import { employeeType } from '../../../types/Employee';
 
 type Props = {
   selectedStoreId: number;
   setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
   selectedEmployeeId: number;
   setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
+  selectedEmployee: employeeType | null;
+  setSelectedEmployee: React.Dispatch<
+    React.SetStateAction<employeeType | null>
+  >;
 };
 
 const header = css`
@@ -33,6 +38,8 @@ const index: FC<Props> = ({
   setSelectedStoreId,
   selectedStoreId,
   setSelectedEmployeeId,
+  selectedEmployee,
+  setSelectedEmployee,
 }) => (
   <>
     <header css={header}>
@@ -43,12 +50,15 @@ const index: FC<Props> = ({
         <StoreNameForm
           setSelectedStoreId={setSelectedStoreId}
           setSelectedEmployeeId={setSelectedEmployeeId}
+          setSelectedEmployee={setSelectedEmployee}
         />
       </div>
       <div>
         <EmployeeForm
           selectedStoreId={selectedStoreId}
           setSelectedEmployeeId={setSelectedEmployeeId}
+          selectedEmployee={selectedEmployee}
+          setSelectedEmployee={setSelectedEmployee}
         />
       </div>
       <div>

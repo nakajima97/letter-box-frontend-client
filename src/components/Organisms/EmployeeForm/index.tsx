@@ -4,17 +4,15 @@ import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+import { employeeType } from '../../../types/Employee';
+
 type Props = {
   selectedStoreId: number;
   setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
-};
-
-type employeeType = {
-  id: number;
-  // eslint-disable-next-line
-  first_name: string;
-  // eslint-disable-next-line
-  last_name: string;
+  selectedEmployee: employeeType | null;
+  setSelectedEmployee: React.Dispatch<
+    React.SetStateAction<employeeType | null>
+  >;
 };
 
 type apiResponse = {
@@ -23,9 +21,15 @@ type apiResponse = {
   employees: employeeType[];
 };
 
-const defaultEmployeees = [{ id: NaN, first_name: '', last_name: '' }];
+const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
+const defaultEmployeees = [defaultEmployee];
 
-const Index: FC<Props> = ({ selectedStoreId, setSelectedEmployeeId }) => {
+const Index: FC<Props> = ({
+  selectedStoreId,
+  setSelectedEmployeeId,
+  selectedEmployee,
+  setSelectedEmployee,
+}) => {
   const [employees, setEmployees] = useState<employeeType[]>(defaultEmployeees);
 
   const history = useHistory();
@@ -63,14 +67,18 @@ const Index: FC<Props> = ({ selectedStoreId, setSelectedEmployeeId }) => {
         if (value) {
           history.push(`/message/${selectedStoreId}/${value.id}`);
           setSelectedEmployeeId(value.id);
+          setSelectedEmployee(value);
         } else if (selectedStoreId) {
           history.push(`/message/${selectedStoreId}`);
           setSelectedEmployeeId(NaN);
+          setSelectedEmployee(defaultEmployee);
         } else {
           history.push(`/`);
           setSelectedEmployeeId(NaN);
+          setSelectedEmployee(defaultEmployee);
         }
       }}
+      value={selectedEmployee}
     />
   );
 };
