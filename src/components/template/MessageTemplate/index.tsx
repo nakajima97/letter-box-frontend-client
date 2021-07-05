@@ -11,6 +11,8 @@ import Submit from '../../Organisms/Submit';
 type Props = {
   selectedStoreId: number;
   setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
+  selectedEmployeeId: number;
+  setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const header = css`
@@ -27,17 +29,27 @@ const container = css`
   gap: 10px;
 `;
 
-const index: FC<Props> = ({ setSelectedStoreId, selectedStoreId }) => (
+const index: FC<Props> = ({
+  setSelectedStoreId,
+  selectedStoreId,
+  setSelectedEmployeeId,
+}) => (
   <>
     <header css={header}>
       <Header />
     </header>
     <main css={container}>
       <div>
-        <StoreNameForm setSelectedStoreId={setSelectedStoreId} />
+        <StoreNameForm
+          setSelectedStoreId={setSelectedStoreId}
+          setSelectedEmployeeId={setSelectedEmployeeId}
+        />
       </div>
       <div>
-        <EmployeeForm selectedStoreId={selectedStoreId} />
+        <EmployeeForm
+          selectedStoreId={selectedStoreId}
+          setSelectedEmployeeId={setSelectedEmployeeId}
+        />
       </div>
       <div>
         <MessageForm />

@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 type Props = {
   selectedStoreId: number;
+  setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type employeeType = {
@@ -22,7 +23,7 @@ type apiResponse = {
   employees: employeeType[];
 };
 
-const Index: FC<Props> = ({ selectedStoreId }) => {
+const Index: FC<Props> = ({ selectedStoreId, setSelectedEmployeeId }) => {
   const [employees, setEmployees] = useState<employeeType[]>([
     { id: NaN, first_name: '', last_name: '' },
   ]);
@@ -57,6 +58,13 @@ const Index: FC<Props> = ({ selectedStoreId }) => {
       onChange={(evnet, value) => {
         if (value) {
           history.push(`/message/${selectedStoreId}/${value.id}`);
+          setSelectedEmployeeId(value.id);
+        } else if (selectedStoreId) {
+          history.push(`/message/${selectedStoreId}`);
+          setSelectedEmployeeId(NaN);
+        } else {
+          history.push(`/`);
+          setSelectedEmployeeId(NaN);
         }
       }}
     />

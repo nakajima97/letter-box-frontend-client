@@ -10,6 +10,9 @@ const App: FC = () => (
       <Route exact path="/">
         <MessagePage />
       </Route>
+      <Route path="/message/:storeId">
+        <MessagePage />
+      </Route>
       <Route path="/message/:storeId/:employeeId">
         <MessagePage />
       </Route>

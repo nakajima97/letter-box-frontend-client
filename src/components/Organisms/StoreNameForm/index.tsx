@@ -2,9 +2,11 @@ import { FC, useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
   setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type storeType = {
@@ -16,8 +18,10 @@ type apiResponse = {
   data: storeType[];
 };
 
-const Index: FC<Props> = ({ setSelectedStoreId }) => {
+const Index: FC<Props> = ({ setSelectedStoreId, setSelectedEmployeeId }) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
+
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -41,9 +45,15 @@ const Index: FC<Props> = ({ setSelectedStoreId }) => {
             variant="standard"
           />
         )}
-        onChange={(event, value) =>
-          setSelectedStoreId(value === null ? NaN : value.id)
-        }
+        onChange={(event, value) => {
+          setSelectedStoreId(value === null ? NaN : value.id);
+          setSelectedEmployeeId(NaN);
+          if (value) {
+            history.push(`/message/${value.id}`);
+          } else {
+            history.push(`/`);
+          }
+        }}
       />
     )
   );
