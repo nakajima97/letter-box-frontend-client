@@ -2,6 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
   selectedStoreId: number;
@@ -25,6 +26,8 @@ const Index: FC<Props> = ({ selectedStoreId }) => {
   const [employees, setEmployees] = useState<employeeType[]>([
     { id: NaN, first_name: '', last_name: '' },
   ]);
+
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -51,9 +54,11 @@ const Index: FC<Props> = ({ selectedStoreId }) => {
         />
       )}
       disabled={Number.isNaN(selectedStoreId)}
-      // onChange={(evnet, value) => {
-
-      // }}
+      onChange={(evnet, value) => {
+        if (value) {
+          history.push(`/message/${selectedStoreId}/${value.id}`);
+        }
+      }}
     />
   );
 };
