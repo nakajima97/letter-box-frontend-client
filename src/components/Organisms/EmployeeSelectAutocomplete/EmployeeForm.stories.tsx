@@ -4,39 +4,34 @@ import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import Index from '.';
+import responseData from './MockAPIServerResponseData';
 import { employeeType } from '../../../types/Employee';
-import responseData from './MockApiServerResponseData';
 
 export default {
   component: Index,
-  title: 'molecules/StoreNameForm',
+  title: 'molecules/EmployeeSelectAutocomplete',
   decorators: [
     (story: () => JSX.Element): JSX.Element => <Router>{story()}</Router>,
   ],
 };
 
-const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
-
 const mock = new MockAdapter(axios);
 
 export const Default: FC = () => {
-  // eslint-disable-next-line
-  const [selectedStoreId, setSelectedStoreId] = useState(1);
-  // eslint-disable-next-line
-  const [selectedEmployeeId, setSelectedEmployeeId] = useState(1);
-  // eslint-disable-next-line
+  const [selectedStoreId, setSelectedEmployeeId] = useState(1);
   const [selectedEmployee, setSelectedEmployee] = useState<employeeType | null>(
-    defaultEmployee,
+    { id: NaN, first_name: '', last_name: '' },
   );
 
   mock
-    .onGet('http://localhost:3000/api/v1/stores?count=50')
+    .onGet('http://localhost:3000/api/v1/employees/search?store_id=1')
     .reply(200, responseData);
 
   return (
     <Index
-      setSelectedStoreId={setSelectedStoreId}
+      selectedStoreId={selectedStoreId}
       setSelectedEmployeeId={setSelectedEmployeeId}
+      selectedEmployee={selectedEmployee}
       setSelectedEmployee={setSelectedEmployee}
     />
   );
