@@ -38,7 +38,7 @@ const Index: FC<Props> = ({ selectedStoreId }) => {
     <Autocomplete
       id="disable-close-on-select"
       disableCloseOnSelect
-      options={employees ?? [{ id: 0, first_name: 'foo', last_name: 'bar' }]}
+      options={employees ?? [{ id: NaN, first_name: '', last_name: '' }]}
       getOptionLabel={(option) => `${option.first_name} ${option.last_name}`}
       renderInput={(params) => (
         <TextField
