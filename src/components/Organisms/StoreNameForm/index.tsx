@@ -4,9 +4,14 @@ import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
+import { employeeType } from '../../../types/Employee';
+
 type Props = {
   setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
   setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedEmployee: React.Dispatch<
+    React.SetStateAction<employeeType | null>
+  >;
 };
 
 type storeType = {
@@ -18,7 +23,13 @@ type apiResponse = {
   data: storeType[];
 };
 
-const Index: FC<Props> = ({ setSelectedStoreId, setSelectedEmployeeId }) => {
+const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
+
+const Index: FC<Props> = ({
+  setSelectedStoreId,
+  setSelectedEmployeeId,
+  setSelectedEmployee,
+}) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
 
   const history = useHistory();
@@ -52,6 +63,7 @@ const Index: FC<Props> = ({ setSelectedStoreId, setSelectedEmployeeId }) => {
             history.push(`/message/${value.id}`);
           } else {
             history.push(`/`);
+            setSelectedEmployee(defaultEmployee);
           }
         }}
       />
