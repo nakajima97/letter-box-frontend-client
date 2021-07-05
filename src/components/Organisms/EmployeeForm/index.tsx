@@ -23,21 +23,25 @@ type apiResponse = {
   employees: employeeType[];
 };
 
+const defaultEmployeees = [{ id: NaN, first_name: '', last_name: '' }];
+
 const Index: FC<Props> = ({ selectedStoreId, setSelectedEmployeeId }) => {
-  const [employees, setEmployees] = useState<employeeType[]>([
-    { id: NaN, first_name: '', last_name: '' },
-  ]);
+  const [employees, setEmployees] = useState<employeeType[]>(defaultEmployeees);
 
   const history = useHistory();
 
   useEffect(() => {
-    axios
-      .get<apiResponse>(
-        `http://localhost:3000/api/v1/employees/search?store_id=${selectedStoreId}`,
-      )
-      .then((res) => setEmployees(res.data.employees))
-      // eslint-disable-next-line
-      .catch((err) => console.log(err));
+    if (selectedStoreId) {
+      axios
+        .get<apiResponse>(
+          `http://localhost:3000/api/v1/employees/search?store_id=${selectedStoreId}`,
+        )
+        .then((res) => setEmployees(res.data.employees))
+        // eslint-disable-next-line
+        .catch((err) => console.log(err));
+    } else {
+      setEmployees(defaultEmployeees);
+    }
   }, [selectedStoreId]);
 
   return (
