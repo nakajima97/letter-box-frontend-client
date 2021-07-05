@@ -2,9 +2,11 @@ import { FC, useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 type Props = {
   selectedStoreId: number;
+  setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
 };
 
 type employeeType = {
@@ -21,24 +23,32 @@ type apiResponse = {
   employees: employeeType[];
 };
 
-const Index: FC<Props> = ({ selectedStoreId }) => {
-  const [employees, setEmployees] = useState<employeeType[] | null>(null);
+const defaultEmployeees = [{ id: NaN, first_name: '', last_name: '' }];
+
+const Index: FC<Props> = ({ selectedStoreId, setSelectedEmployeeId }) => {
+  const [employees, setEmployees] = useState<employeeType[]>(defaultEmployeees);
+
+  const history = useHistory();
 
   useEffect(() => {
-    axios
-      .get<apiResponse>(
-        `http://localhost:3000/api/v1/employees/search?store_id=${selectedStoreId}`,
-      )
-      .then((res) => setEmployees(res.data.employees))
-      // eslint-disable-next-line
-      .catch((err) => console.log(err));
+    if (selectedStoreId) {
+      axios
+        .get<apiResponse>(
+          `http://localhost:3000/api/v1/employees/search?store_id=${selectedStoreId}`,
+        )
+        .then((res) => setEmployees(res.data.employees))
+        // eslint-disable-next-line
+        .catch((err) => console.log(err));
+    } else {
+      setEmployees(defaultEmployeees);
+    }
   }, [selectedStoreId]);
 
   return (
     <Autocomplete
       id="disable-close-on-select"
       disableCloseOnSelect
-      options={employees ?? [{ id: 0, first_name: 'foo', last_name: 'bar' }]}
+      options={employees}
       getOptionLabel={(option) => `${option.first_name} ${option.last_name}`}
       renderInput={(params) => (
         <TextField
@@ -49,6 +59,18 @@ const Index: FC<Props> = ({ selectedStoreId }) => {
         />
       )}
       disabled={Number.isNaN(selectedStoreId)}
+      onChange={(evnet, value) => {
+        if (value) {
+          history.push(`/message/${selectedStoreId}/${value.id}`);
+          setSelectedEmployeeId(value.id);
+        } else if (selectedStoreId) {
+          history.push(`/message/${selectedStoreId}`);
+          setSelectedEmployeeId(NaN);
+        } else {
+          history.push(`/`);
+          setSelectedEmployeeId(NaN);
+        }
+      }}
     />
   );
 };
