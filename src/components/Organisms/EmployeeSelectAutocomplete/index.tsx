@@ -51,7 +51,7 @@ const Index: FC<Props> = ({
   return (
     <Autocomplete
       id="disable-close-on-select"
-      disableCloseOnSelect
+      // disableCloseOnSelect
       options={employees}
       getOptionLabel={(option) => `${option.first_name} ${option.last_name}`}
       renderInput={(params) => (

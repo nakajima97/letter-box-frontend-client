@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { css } from '@emotion/react';
 
 import Header from '../../Organisms/Header';
-import StoreNameForm from '../../Organisms/StoreNameForm';
-import EmployeeForm from '../../Organisms/EmployeeForm';
+import StoreNameForm from '../../Organisms/StoreSelectAutocomplete';
+import EmployeeForm from '../../Organisms/EmployeeSelectAutocomplete';
 import MessageForm from '../../Organisms/MessageForm';
 import Submit from '../../Organisms/Submit';
 import { employeeType } from '../../../types/Employee';
