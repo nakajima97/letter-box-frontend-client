@@ -22,7 +22,9 @@ type apiResponse = {
 };
 
 const Index: FC<Props> = ({ selectedStoreId }) => {
-  const [employees, setEmployees] = useState<employeeType[] | null>(null);
+  const [employees, setEmployees] = useState<employeeType[]>([
+    { id: NaN, first_name: '', last_name: '' },
+  ]);
 
   useEffect(() => {
     axios
@@ -38,7 +40,7 @@ const Index: FC<Props> = ({ selectedStoreId }) => {
     <Autocomplete
       id="disable-close-on-select"
       disableCloseOnSelect
-      options={employees ?? [{ id: NaN, first_name: '', last_name: '' }]}
+      options={employees}
       getOptionLabel={(option) => `${option.first_name} ${option.last_name}`}
       renderInput={(params) => (
         <TextField
