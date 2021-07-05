@@ -4,6 +4,7 @@ import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import Index from '.';
+import responseData from './MockAPIServerResponseData';
 import { employeeType } from '../../../types/Employee';
 
 export default {
@@ -24,16 +25,7 @@ export const Default: FC = () => {
 
   mock
     .onGet('http://localhost:3000/api/v1/employees/search?store_id=1')
-    .reply(200, {
-      store_id: 1,
-      employees: [
-        {
-          id: 1,
-          first_name: 'foo',
-          last_name: 'bar',
-        },
-      ],
-    });
+    .reply(200, responseData);
 
   return (
     <Index
