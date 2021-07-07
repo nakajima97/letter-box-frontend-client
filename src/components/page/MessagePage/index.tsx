@@ -12,6 +12,7 @@ const Index: FC = () => {
     defaultEmployee,
   );
   const [message, setMessage] = useState('');
+  const [snackbarText, setSnackbarText] = useState('');
 
   return (
     <>
@@ -24,6 +25,8 @@ const Index: FC = () => {
         setSelectedEmployee={setSelectedEmployee}
         message={message}
         setMessage={setMessage}
+        snackbarText={snackbarText}
+        setSnackbarText={setSnackbarText}
       />
     </>
   );

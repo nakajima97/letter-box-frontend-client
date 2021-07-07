@@ -7,6 +7,7 @@ import StoreNameForm from '../../Organisms/StoreSelectAutocomplete';
 import EmployeeForm from '../../Organisms/EmployeeSelectAutocomplete';
 import MessageForm from '../../Organisms/MessageForm';
 import Submit from '../../Organisms/Submit';
+import Snackbar from '../../Organisms/Snackbar';
 import { employeeType } from '../../../types/Employee';
 
 type Props = {
@@ -20,6 +21,8 @@ type Props = {
   >;
   message: string;
   setMessage: React.Dispatch<React.SetStateAction<string>>;
+  snackbarText: string;
+  setSnackbarText: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const header = css`
@@ -44,6 +47,8 @@ const index: FC<Props> = ({
   setSelectedEmployee,
   message,
   setMessage,
+  snackbarText,
+  setSnackbarText,
 }) => (
   <>
     <header css={header}>
@@ -73,9 +78,11 @@ const index: FC<Props> = ({
           storeId={selectedStoreId}
           employeeId={selectedEmployee?.id}
           message={message}
+          setSnackbarText={setSnackbarText}
         />
       </div>
     </main>
+    <Snackbar text={snackbarText} setText={setSnackbarText} />
   </>
 );
 

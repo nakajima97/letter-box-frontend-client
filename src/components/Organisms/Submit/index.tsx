@@ -2,20 +2,41 @@ import { FC } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { Button } from '@material-ui/core';
-// import axios from 'axios';
+import axios from 'axios';
 
 type Props = {
   storeId: number | undefined;
   employeeId: number | undefined;
   message: string | undefined;
+  setSnackbarText: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const style = css`
   width: 100%;
 `;
 
-const Index: FC<Props> = ({ storeId, employeeId, message }) => {
+const Index: FC<Props> = ({
+  storeId,
+  employeeId,
+  message,
+  setSnackbarText,
+}) => {
   const isSendable = () => !!(storeId && employeeId && message);
+
+  const submitMessage = () => {
+    if (storeId && employeeId && message) {
+      const params = new URLSearchParams();
+      params.append('store_id', storeId.toString());
+      params.append('employee_id', employeeId.toString());
+      params.append('message_text', message);
+
+      axios
+        .post('http://localhost:3000/api/v1/messages', params)
+        .then(() => setSnackbarText('投稿に成功しました'))
+        // eslint-disable-next-line
+        .catch((err) => err);
+    }
+  };
 
   return (
     <>
@@ -24,6 +45,7 @@ const Index: FC<Props> = ({ storeId, employeeId, message }) => {
         variant="contained"
         color="primary"
         disabled={!isSendable()}
+        onClick={submitMessage}
       >
         送信
       </Button>
