@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import MessagePage from './components/page/MessagePage';
-import NotFound from './components/page/NotFound';
+import MessagePage from './components/pages/MessagePage';
+import NotFound from './components/pages/NotFound';
 
 const App: FC = () => (
   <Router>

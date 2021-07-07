@@ -1,6 +1,6 @@
 import { FC, useState } from 'react';
 
-import MessageTemplate from '../../template/MessageTemplate';
+import MessageTemplate from '../../templates/MessageTemplate';
 import { storeType } from '../../../types/Store';
 import { employeeType } from '../../../types/Employee';
 
