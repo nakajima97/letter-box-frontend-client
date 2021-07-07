@@ -2,12 +2,12 @@ import { FC } from 'react';
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 
-import Header from '../../Organisms/Header';
-import StoreSelectAutocomplete from '../../Organisms/StoreSelectAutocomplete';
-import EmployeeForm from '../../Organisms/EmployeeSelectAutocomplete';
-import MessageForm from '../../Organisms/MessageForm';
-import Submit from '../../Organisms/Submit';
-import Snackbar from '../../Organisms/Snackbar';
+import Header from '../../organisms/Header';
+import StoreSelectAutocomplete from '../../organisms/StoreSelectAutocomplete';
+import EmployeeForm from '../../organisms/EmployeeSelectAutocomplete';
+import MessageForm from '../../organisms/MessageForm';
+import Submit from '../../organisms/Submit';
+import Snackbar from '../../organisms/Snackbar';
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
 
