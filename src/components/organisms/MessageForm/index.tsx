@@ -3,11 +3,16 @@ import { FC } from 'react';
 import { css } from '@emotion/react';
 import { TextField } from '@material-ui/core';
 
+type Props = {
+  message: string;
+  setMessage: React.Dispatch<React.SetStateAction<string>>;
+};
+
 const style = css`
   width: 100%;
 `;
 
-const index: FC = () => (
+const Index: FC<Props> = ({ message, setMessage }) => (
   <>
     <TextField
       css={style}
@@ -15,8 +20,10 @@ const index: FC = () => (
       helperText="感謝のメッセージを入れてください"
       multiline
       rows={12}
+      value={message}
+      onChange={(e) => setMessage(e.target.value)}
     />
   </>
 );
 
-export default index;
+export default Index;

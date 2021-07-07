@@ -1,4 +1,4 @@
-import { FC } from 'react';
+// import { FC } from 'react';
 import Index from '.';
 
 export default {
@@ -6,4 +6,4 @@ export default {
   title: 'molecules/MessageForm',
 };
 
-export const Default: FC = () => <Index />;
+// export const Default: FC = () => <Index />;
