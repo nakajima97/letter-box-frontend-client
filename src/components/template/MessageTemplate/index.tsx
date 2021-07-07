@@ -3,18 +3,17 @@ import { FC } from 'react';
 import { css } from '@emotion/react';
 
 import Header from '../../Organisms/Header';
-import StoreNameForm from '../../Organisms/StoreSelectAutocomplete';
+import StoreSelectAutocomplete from '../../Organisms/StoreSelectAutocomplete';
 import EmployeeForm from '../../Organisms/EmployeeSelectAutocomplete';
 import MessageForm from '../../Organisms/MessageForm';
 import Submit from '../../Organisms/Submit';
 import Snackbar from '../../Organisms/Snackbar';
 import { employeeType } from '../../../types/Employee';
+import { storeType } from '../../../types/Store';
 
 type Props = {
-  selectedStoreId: number;
-  setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
-  selectedEmployeeId: number;
-  setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
+  selectedStore: storeType | null;
+  setSelectedStore: React.Dispatch<React.SetStateAction<storeType | null>>;
   selectedEmployee: employeeType | null;
   setSelectedEmployee: React.Dispatch<
     React.SetStateAction<employeeType | null>
@@ -40,9 +39,8 @@ const container = css`
 `;
 
 const index: FC<Props> = ({
-  setSelectedStoreId,
-  selectedStoreId,
-  setSelectedEmployeeId,
+  selectedStore,
+  setSelectedStore,
   selectedEmployee,
   setSelectedEmployee,
   message,
@@ -56,16 +54,14 @@ const index: FC<Props> = ({
     </header>
     <main css={container}>
       <div>
-        <StoreNameForm
-          setSelectedStoreId={setSelectedStoreId}
-          setSelectedEmployeeId={setSelectedEmployeeId}
+        <StoreSelectAutocomplete
+          setSelectedStore={setSelectedStore}
           setSelectedEmployee={setSelectedEmployee}
         />
       </div>
       <div>
         <EmployeeForm
-          selectedStoreId={selectedStoreId}
-          setSelectedEmployeeId={setSelectedEmployeeId}
+          selectedStore={selectedStore}
           selectedEmployee={selectedEmployee}
           setSelectedEmployee={setSelectedEmployee}
         />
@@ -75,7 +71,7 @@ const index: FC<Props> = ({
       </div>
       <div>
         <Submit
-          storeId={selectedStoreId}
+          storeId={selectedStore?.id}
           employeeId={selectedEmployee?.id}
           message={message}
           setSnackbarText={setSnackbarText}

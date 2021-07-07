@@ -5,18 +5,13 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import { employeeType } from '../../../types/Employee';
+import { storeType } from '../../../types/Store';
 
 type Props = {
-  setSelectedStoreId: React.Dispatch<React.SetStateAction<number>>;
-  setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
+  setSelectedStore: React.Dispatch<React.SetStateAction<storeType | null>>;
   setSelectedEmployee: React.Dispatch<
     React.SetStateAction<employeeType | null>
   >;
-};
-
-type storeType = {
-  name: string;
-  id: number;
 };
 
 type apiResponse = {
@@ -25,11 +20,7 @@ type apiResponse = {
 
 const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
 
-const Index: FC<Props> = ({
-  setSelectedStoreId,
-  setSelectedEmployeeId,
-  setSelectedEmployee,
-}) => {
+const Index: FC<Props> = ({ setSelectedStore, setSelectedEmployee }) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
 
   const history = useHistory();
@@ -57,8 +48,8 @@ const Index: FC<Props> = ({
           />
         )}
         onChange={(event, value) => {
-          setSelectedStoreId(value === null ? NaN : value.id);
-          setSelectedEmployeeId(NaN);
+          setSelectedStore(value ?? null);
+          setSelectedEmployee(defaultEmployee);
           if (value) {
             history.push(`/message/${value.id}`);
           } else {

@@ -5,10 +5,10 @@ import axios from 'axios';
 import { useHistory } from 'react-router-dom';
 
 import { employeeType } from '../../../types/Employee';
+import { storeType } from '../../../types/Store';
 
 type Props = {
-  selectedStoreId: number;
-  setSelectedEmployeeId: React.Dispatch<React.SetStateAction<number>>;
+  selectedStore: storeType | null;
   selectedEmployee: employeeType | null;
   setSelectedEmployee: React.Dispatch<
     React.SetStateAction<employeeType | null>
@@ -25,8 +25,7 @@ const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
 const defaultEmployeees = [defaultEmployee];
 
 const Index: FC<Props> = ({
-  selectedStoreId,
-  setSelectedEmployeeId,
+  selectedStore,
   selectedEmployee,
   setSelectedEmployee,
 }) => {
@@ -35,10 +34,10 @@ const Index: FC<Props> = ({
   const history = useHistory();
 
   useEffect(() => {
-    if (selectedStoreId) {
+    if (selectedStore?.id) {
       axios
         .get<apiResponse>(
-          `http://localhost:3000/api/v1/employees/search?store_id=${selectedStoreId}`,
+          `http://localhost:3000/api/v1/employees/search?store_id=${selectedStore.id}`,
         )
         .then((res) => setEmployees(res.data.employees))
         // eslint-disable-next-line
@@ -46,7 +45,7 @@ const Index: FC<Props> = ({
     } else {
       setEmployees(defaultEmployeees);
     }
-  }, [selectedStoreId]);
+  }, [selectedStore]);
 
   return (
     <Autocomplete
@@ -62,19 +61,16 @@ const Index: FC<Props> = ({
           variant="standard"
         />
       )}
-      disabled={Number.isNaN(selectedStoreId)}
+      disabled={Number.isNaN(selectedStore?.id)}
       onChange={(evnet, value) => {
-        if (value) {
-          history.push(`/message/${selectedStoreId}/${value.id}`);
-          setSelectedEmployeeId(value.id);
+        if (value && selectedStore) {
+          history.push(`/message/${selectedStore.id}/${value.id}`);
           setSelectedEmployee(value);
-        } else if (selectedStoreId) {
-          history.push(`/message/${selectedStoreId}`);
-          setSelectedEmployeeId(NaN);
+        } else if (selectedStore) {
+          history.push(`/message/${selectedStore.id}`);
           setSelectedEmployee(defaultEmployee);
         } else {
           history.push(`/`);
-          setSelectedEmployeeId(NaN);
           setSelectedEmployee(defaultEmployee);
         }
       }}
