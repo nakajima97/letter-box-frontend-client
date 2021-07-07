@@ -18,6 +18,8 @@ type Props = {
   setSelectedEmployee: React.Dispatch<
     React.SetStateAction<employeeType | null>
   >;
+  message: string;
+  setMessage: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const header = css`
@@ -40,6 +42,8 @@ const index: FC<Props> = ({
   setSelectedEmployeeId,
   selectedEmployee,
   setSelectedEmployee,
+  message,
+  setMessage,
 }) => (
   <>
     <header css={header}>
@@ -62,10 +66,14 @@ const index: FC<Props> = ({
         />
       </div>
       <div>
-        <MessageForm />
+        <MessageForm message={message} setMessage={setMessage} />
       </div>
       <div>
-        <Submit />
+        <Submit
+          storeId={selectedStoreId}
+          employeeId={selectedEmployee?.id}
+          message={message}
+        />
       </div>
     </main>
   </>

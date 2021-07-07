@@ -11,6 +11,7 @@ const Index: FC = () => {
   const [selectedEmployee, setSelectedEmployee] = useState<employeeType | null>(
     defaultEmployee,
   );
+  const [message, setMessage] = useState('');
 
   return (
     <>
@@ -21,6 +22,8 @@ const Index: FC = () => {
         setSelectedEmployeeId={setSelectedEmployeeId}
         selectedEmployee={selectedEmployee}
         setSelectedEmployee={setSelectedEmployee}
+        message={message}
+        setMessage={setMessage}
       />
     </>
   );
