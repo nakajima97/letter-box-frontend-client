@@ -8,6 +8,7 @@ import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
 
 type Props = {
+  selectedStore: storeType | null;
   setSelectedStore: React.Dispatch<React.SetStateAction<storeType | null>>;
   setSelectedEmployee: React.Dispatch<
     React.SetStateAction<employeeType | null>
@@ -20,7 +21,11 @@ type apiResponse = {
 
 const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
 
-const Index: FC<Props> = ({ setSelectedStore, setSelectedEmployee }) => {
+const Index: FC<Props> = ({
+  setSelectedStore,
+  setSelectedEmployee,
+  selectedStore,
+}) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
 
   const history = useHistory();
@@ -57,6 +62,7 @@ const Index: FC<Props> = ({ setSelectedStore, setSelectedEmployee }) => {
             setSelectedEmployee(defaultEmployee);
           }
         }}
+        value={selectedStore}
       />
     )
   );

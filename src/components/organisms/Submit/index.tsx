@@ -9,6 +9,7 @@ type Props = {
   employeeId: number | undefined;
   message: string | undefined;
   setSnackbarText: React.Dispatch<React.SetStateAction<string>>;
+  clearForm: () => void;
 };
 
 const style = css`
@@ -20,6 +21,7 @@ const Index: FC<Props> = ({
   employeeId,
   message,
   setSnackbarText,
+  clearForm,
 }) => {
   const isSendable = () => !!(storeId && employeeId && message);
 
@@ -32,7 +34,10 @@ const Index: FC<Props> = ({
 
       axios
         .post('http://localhost:3000/api/v1/messages', params)
-        .then(() => setSnackbarText('投稿に成功しました'))
+        .then(() => {
+          setSnackbarText('投稿に成功しました');
+          clearForm();
+        })
         // eslint-disable-next-line
         .catch((err) => err);
     }

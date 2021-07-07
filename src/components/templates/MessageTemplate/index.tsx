@@ -22,6 +22,7 @@ type Props = {
   setMessage: React.Dispatch<React.SetStateAction<string>>;
   snackbarText: string;
   setSnackbarText: React.Dispatch<React.SetStateAction<string>>;
+  clearForm: () => void;
 };
 
 const header = css`
@@ -47,6 +48,7 @@ const index: FC<Props> = ({
   setMessage,
   snackbarText,
   setSnackbarText,
+  clearForm,
 }) => (
   <>
     <header css={header}>
@@ -55,6 +57,7 @@ const index: FC<Props> = ({
     <main css={container}>
       <div>
         <StoreSelectAutocomplete
+          selectedStore={selectedStore}
           setSelectedStore={setSelectedStore}
           setSelectedEmployee={setSelectedEmployee}
         />
@@ -75,6 +78,7 @@ const index: FC<Props> = ({
           employeeId={selectedEmployee?.id}
           message={message}
           setSnackbarText={setSnackbarText}
+          clearForm={clearForm}
         />
       </div>
     </main>

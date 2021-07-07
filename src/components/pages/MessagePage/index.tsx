@@ -4,8 +4,8 @@ import MessageTemplate from '../../templates/MessageTemplate';
 import { storeType } from '../../../types/Store';
 import { employeeType } from '../../../types/Employee';
 
-const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
 const defaultStore = { id: NaN, name: '' };
+const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
 
 const Index: FC = () => {
   const [selectedStore, setSelectedStore] = useState<storeType | null>(
@@ -16,6 +16,12 @@ const Index: FC = () => {
   );
   const [message, setMessage] = useState('');
   const [snackbarText, setSnackbarText] = useState('');
+
+  const clearForm = () => {
+    setSelectedStore(defaultStore);
+    setSelectedEmployee(defaultEmployee);
+    setMessage('');
+  };
 
   return (
     <>
@@ -28,6 +34,7 @@ const Index: FC = () => {
         setMessage={setMessage}
         snackbarText={snackbarText}
         setSnackbarText={setSnackbarText}
+        clearForm={clearForm}
       />
     </>
   );
