@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
+import { snackbarType } from '../../../types/Snackbar';
 
 type Props = {
   selectedStore: storeType | null;
@@ -13,6 +14,7 @@ type Props = {
   setSelectedEmployee: React.Dispatch<
     React.SetStateAction<employeeType | null>
   >;
+  setSnackbar: React.Dispatch<React.SetStateAction<snackbarType>>;
 };
 
 type apiResponse = {
@@ -28,6 +30,7 @@ const Index: FC<Props> = ({
   selectedStore,
   selectedEmployee,
   setSelectedEmployee,
+  setSnackbar,
 }) => {
   const [employees, setEmployees] = useState<employeeType[]>(defaultEmployeees);
 
@@ -41,11 +44,16 @@ const Index: FC<Props> = ({
         )
         .then((res) => setEmployees(res.data.employees))
         // eslint-disable-next-line
-        .catch((err) => console.log(err));
+        .catch(() =>
+          setSnackbar({
+            type: 'error',
+            text: '従業員一覧の取得に失敗しました。時間をおいて再度アクセスしてください。',
+          }),
+        );
     } else {
       setEmployees(defaultEmployeees);
     }
-  }, [selectedStore]);
+  }, [selectedStore, setSnackbar]);
 
   return (
     <Autocomplete
