@@ -49,6 +49,9 @@ const Index: FC<Props> = ({
             text: 'メッセージの送信に失敗しました。時間をおいて再度実行してください。',
           });
         });
+    } else {
+      // eslint-disable-next-line
+      console.log('エラー発生');
     }
   };
 

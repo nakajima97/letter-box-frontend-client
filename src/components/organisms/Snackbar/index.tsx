@@ -5,20 +5,22 @@ import { Alert } from '@material-ui/lab';
 import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
 
 type Props = {
-  text: string | undefined;
-  setText: React.Dispatch<React.SetStateAction<snackbarType>>;
+  snackbar: snackbarType;
+  setSnackbar: React.Dispatch<React.SetStateAction<snackbarType>>;
 };
 
-const Index: FC<Props> = ({ text, setText }) => {
+const Index: FC<Props> = ({ snackbar, setSnackbar }) => {
   const handleClose = () => {
-    setText(defaultSnakbar);
+    setSnackbar(defaultSnakbar);
   };
 
   return (
     <>
-      {text && (
-        <Snackbar open={!!text}>
-          <Alert onClose={handleClose}>{text}</Alert>
+      {snackbar.text && (
+        <Snackbar open={!!snackbar.text}>
+          <Alert severity={snackbar.type} onClose={handleClose}>
+            {snackbar.text}
+          </Alert>
         </Snackbar>
       )}
     </>

@@ -83,7 +83,7 @@ const index: FC<Props> = ({
         />
       </div>
     </main>
-    <Snackbar text={snackbar.text} setText={setSnackbar} />
+    <Snackbar snackbar={snackbar} setSnackbar={setSnackbar} />
   </>
 );
 
