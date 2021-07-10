@@ -1,11 +1,12 @@
-// import { FC, useState } from 'react';
-// import MockAdapter from 'axios-mock-adapter';
-// import axios from 'axios';
+import { FC, useState } from 'react';
+import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
 
 import Index from '.';
-// import { employeeType } from '../../../types/Employee';
-// import responseData from './MockApiServerResponseData';
+import { employeeType } from '../../../types/Employee';
+import { storeType } from '../../../types/Store';
+import responseData from './MockApiServerResponseData';
 
 export default {
   component: Index,
@@ -15,29 +16,27 @@ export default {
   ],
 };
 
-// const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
+const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
 
-// const mock = new MockAdapter(axios);
+const mock = new MockAdapter(axios);
 
-// export const Default: FC = () => {
-//   // eslint-disable-next-line
-//   const [selectedStoreId, setSelectedStoreId] = useState(1);
-//   // eslint-disable-next-line
-//   const [selectedEmployeeId, setSelectedEmployeeId] = useState(1);
-//   // eslint-disable-next-line
-//   const [selectedEmployee, setSelectedEmployee] = useState<employeeType | null>(
-//     defaultEmployee,
-//   );
+export const Default: FC = () => {
+  // eslint-disable-next-line
+  const [selectedStore, setSelectedStore] = useState<storeType | null>(null);
+  // eslint-disable-next-line
+  const [selectedEmployee, setSelectedEmployee] = useState<employeeType | null>(
+    defaultEmployee,
+  );
 
-//   mock
-//     .onGet('http://localhost:3000/api/v1/stores?count=50')
-//     .reply(200, responseData);
+  mock
+    .onGet('http://localhost:3000/api/v1/stores?count=50')
+    .reply(200, responseData);
 
-//   return (
-//     <Index
-//       setSelectedStoreId={setSelectedStoreId}
-//       setSelectedEmployeeId={setSelectedEmployeeId}
-//       setSelectedEmployee={setSelectedEmployee}
-//     />
-//   );
-// };
+  return (
+    <Index
+      setSelectedStore={setSelectedStore}
+      setSelectedEmployee={setSelectedEmployee}
+      selectedStore={selectedStore}
+    />
+  );
+};
