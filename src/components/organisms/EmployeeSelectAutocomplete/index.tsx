@@ -44,6 +44,8 @@ const Index: FC<Props> = ({
         .catch((err) => console.log(err));
     } else {
       setEmployees(defaultEmployeees);
+      // eslint-disable-next-line
+      console.log('取得失敗');
     }
   }, [selectedStore]);
 
