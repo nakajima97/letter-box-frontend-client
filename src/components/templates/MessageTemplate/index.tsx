@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { css } from '@emotion/react';
 
 import Header from '../../organisms/Header';
-import StoreSelectAutocomplete from '../../organisms/StoreSelectAutocomplete';
-import EmployeeForm from '../../organisms/EmployeeSelectAutocomplete';
+import StoreSelectAutocomplete from '../../organisms/StoreAutocomplete';
+import EmployeeForm from '../../organisms/EmployeeAutocomplete';
 import MessageForm from '../../organisms/MessageForm';
 import Submit from '../../organisms/Submit';
 import Snackbar from '../../organisms/Snackbar';
