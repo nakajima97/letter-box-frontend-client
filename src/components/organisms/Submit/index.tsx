@@ -43,8 +43,12 @@ const Index: FC<Props> = ({
           });
           clearForm();
         })
-        // eslint-disable-next-line
-        .catch((err) => err);
+        .catch(() => {
+          setSnackbar({
+            type: 'error',
+            text: 'メッセージの送信に失敗しました。時間をおいて再度実行してください。',
+          });
+        });
     }
   };
 
