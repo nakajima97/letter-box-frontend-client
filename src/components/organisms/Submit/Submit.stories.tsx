@@ -1,12 +1,7 @@
 import { FC, useState } from 'react';
-import MockAdapter from 'axios-mock-adapter';
-import axios from 'axios';
 
 import Index from './index';
 import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
-import Snackbar from '../Snackbar';
-
-const mock = new MockAdapter(axios);
 
 export default {
   component: Index,
@@ -14,13 +9,8 @@ export default {
 };
 
 export const Default: FC = () => {
+  // eslint-disable-next-line
   const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnakbar);
-
-  mock.onPost('http://localhost:3000/api/v1/messages', {
-    store_id: 1,
-    employee_id: 1,
-    message_text: 'sample message',
-  });
 
   return (
     <>
@@ -32,7 +22,6 @@ export const Default: FC = () => {
         // eslint-disable-next-line
         clearForm={() => {}}
       />
-      <Snackbar snackbar={snackbar} setSnackbar={setSnackbar} />
     </>
   );
 };
