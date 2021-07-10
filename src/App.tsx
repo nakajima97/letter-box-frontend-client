@@ -7,13 +7,10 @@ import NotFound from './components/pages/NotFound';
 const App: FC = () => (
   <Router>
     <Switch>
-      <Route exact path="/">
-        <MessagePage />
-      </Route>
-      <Route path="/message/:storeId">
-        <MessagePage />
-      </Route>
-      <Route path="/message/:storeId/:employeeId">
+      <Route
+        exact
+        path={['/', '/message/:storeId', '/message/:storeId/:employeeId']}
+      >
         <MessagePage />
       </Route>
       <Route>

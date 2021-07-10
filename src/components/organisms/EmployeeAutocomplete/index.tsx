@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
@@ -36,6 +36,10 @@ const Index: FC<Props> = ({
 
   const history = useHistory();
 
+  const { employeeId }: { employeeId: string | undefined } = useParams();
+  // eslint-disable-next-line
+  console.log({ employeeId });
+
   useEffect(() => {
     if (selectedStore?.id) {
       axios
@@ -54,6 +58,17 @@ const Index: FC<Props> = ({
       setEmployees(defaultEmployeees);
     }
   }, [selectedStore, setSnackbar]);
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    console.log({ employeeId });
+    if (employees && employeeId) {
+      const employee = employees.find((e) => e.id.toString() === employeeId);
+      if (employee) {
+        setSelectedEmployee(employee);
+      }
+    }
+  }, [employees, employeeId, setSelectedEmployee]);
 
   return (
     <Autocomplete
