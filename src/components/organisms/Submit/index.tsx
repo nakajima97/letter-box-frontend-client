@@ -4,11 +4,13 @@ import { css } from '@emotion/react';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 
+import { snackbarType } from '../../../types/Snackbar';
+
 type Props = {
   storeId: number | undefined;
   employeeId: number | undefined;
   message: string | undefined;
-  setSnackbarText: React.Dispatch<React.SetStateAction<string>>;
+  setSnackbar: React.Dispatch<React.SetStateAction<snackbarType>>;
   clearForm: () => void;
 };
 
@@ -20,7 +22,7 @@ const Index: FC<Props> = ({
   storeId,
   employeeId,
   message,
-  setSnackbarText,
+  setSnackbar,
   clearForm,
 }) => {
   const isSendable = () => !!(storeId && employeeId && message);
@@ -35,7 +37,10 @@ const Index: FC<Props> = ({
       axios
         .post('http://localhost:3000/api/v1/messages', params)
         .then(() => {
-          setSnackbarText('投稿に成功しました');
+          setSnackbar({
+            type: 'success',
+            text: 'メッセージを送信しました！！',
+          });
           clearForm();
         })
         // eslint-disable-next-line

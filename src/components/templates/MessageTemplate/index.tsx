@@ -10,6 +10,7 @@ import Submit from '../../organisms/Submit';
 import Snackbar from '../../organisms/Snackbar';
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
+import { snackbarType } from '../../../types/Snackbar';
 
 type Props = {
   selectedStore: storeType | null;
@@ -20,8 +21,8 @@ type Props = {
   >;
   message: string;
   setMessage: React.Dispatch<React.SetStateAction<string>>;
-  snackbarText: string;
-  setSnackbarText: React.Dispatch<React.SetStateAction<string>>;
+  snackbar: snackbarType;
+  setSnackbar: React.Dispatch<React.SetStateAction<snackbarType>>;
   clearForm: () => void;
 };
 
@@ -46,8 +47,8 @@ const index: FC<Props> = ({
   setSelectedEmployee,
   message,
   setMessage,
-  snackbarText,
-  setSnackbarText,
+  snackbar,
+  setSnackbar,
   clearForm,
 }) => (
   <>
@@ -77,12 +78,12 @@ const index: FC<Props> = ({
           storeId={selectedStore?.id}
           employeeId={selectedEmployee?.id}
           message={message}
-          setSnackbarText={setSnackbarText}
+          setSnackbar={setSnackbar}
           clearForm={clearForm}
         />
       </div>
     </main>
-    <Snackbar text={snackbarText} setText={setSnackbarText} />
+    <Snackbar text={snackbar.text} setText={setSnackbar} />
   </>
 );
 
