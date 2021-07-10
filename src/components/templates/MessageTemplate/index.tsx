@@ -68,6 +68,7 @@ const index: FC<Props> = ({
           selectedStore={selectedStore}
           selectedEmployee={selectedEmployee}
           setSelectedEmployee={setSelectedEmployee}
+          setSnackbar={setSnackbar}
         />
       </div>
       <div>

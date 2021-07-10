@@ -7,6 +7,7 @@ import Index from '.';
 import responseData from './MockAPIServerResponseData';
 import { storeType } from '../../../types/Store';
 import { employeeType } from '../../../types/Employee';
+import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
 
 export default {
   component: Index,
@@ -23,10 +24,14 @@ const defaultStore: storeType = {
 
 export const Default: FC = () => {
   // eslint-disable-next-line
-  const [selectedStore, setSelectedStore] = useState<storeType>(defaultStore);
+  const [selectedStore, setSelectedStore] = useState<storeType | null>(
+    defaultStore,
+  );
   const [selectedEmployee, setSelectedEmployee] = useState<employeeType | null>(
     null,
   );
+  // eslint-disable-next-line
+  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnakbar);
 
   const mock = new MockAdapter(axios);
 
@@ -39,6 +44,7 @@ export const Default: FC = () => {
       selectedStore={selectedStore}
       selectedEmployee={selectedEmployee}
       setSelectedEmployee={setSelectedEmployee}
+      setSnackbar={setSnackbar}
     />
   );
 };

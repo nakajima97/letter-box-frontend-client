@@ -52,10 +52,6 @@ const Index: FC<Props> = ({
         );
     } else {
       setEmployees(defaultEmployeees);
-      setSnackbar({
-        type: 'error',
-        text: '従業員一覧の取得に失敗しました。時間をおいて再度アクセスしてください。',
-      });
     }
   }, [selectedStore, setSnackbar]);
 
