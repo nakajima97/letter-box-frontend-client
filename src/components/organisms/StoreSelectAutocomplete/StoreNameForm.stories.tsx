@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import Index from '.';
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
+import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
 import responseData from './MockApiServerResponseData';
 
 export default {
@@ -27,6 +28,8 @@ export const Default: FC = () => {
   const [selectedEmployee, setSelectedEmployee] = useState<employeeType | null>(
     defaultEmployee,
   );
+  // eslint-disable-next-line
+  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnakbar);
 
   mock
     .onGet('http://localhost:3000/api/v1/stores?count=50')
@@ -37,6 +40,7 @@ export const Default: FC = () => {
       setSelectedStore={setSelectedStore}
       setSelectedEmployee={setSelectedEmployee}
       selectedStore={selectedStore}
+      setSnackbar={setSnackbar}
     />
   );
 };

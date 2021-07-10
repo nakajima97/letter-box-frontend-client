@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
+import { snackbarType } from '../../../types/Snackbar';
 
 type Props = {
   selectedStore: storeType | null;
@@ -13,6 +14,7 @@ type Props = {
   setSelectedEmployee: React.Dispatch<
     React.SetStateAction<employeeType | null>
   >;
+  setSnackbar: React.Dispatch<React.SetStateAction<snackbarType>>;
 };
 
 type apiResponse = {
@@ -25,6 +27,7 @@ const Index: FC<Props> = ({
   setSelectedStore,
   setSelectedEmployee,
   selectedStore,
+  setSnackbar,
 }) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
 
@@ -34,9 +37,13 @@ const Index: FC<Props> = ({
     axios
       .get<apiResponse>(`http://localhost:3000/api/v1/stores?count=50`)
       .then((res) => setStores(res.data.data))
-      // eslint-disable-next-line
-      .catch((error) => console.log(error));
-  }, []);
+      .catch(() =>
+        setSnackbar({
+          type: 'error',
+          text: '店舗一覧の取得に失敗しました。時間をおいてアクセスしてください。',
+        }),
+      );
+  }, [setSnackbar]);
 
   return (
     stores && (
