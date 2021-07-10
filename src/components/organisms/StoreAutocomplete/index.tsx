@@ -2,7 +2,7 @@ import { FC, useState, useEffect } from 'react';
 import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
@@ -33,10 +33,14 @@ const Index: FC<Props> = ({
 
   const history = useHistory();
 
+  const { storeId }: { storeId: string | undefined } = useParams();
+
   useEffect(() => {
     axios
       .get<apiResponse>(`http://localhost:3000/api/v1/stores?count=50`)
-      .then((res) => setStores(res.data.data))
+      .then((res) => {
+        setStores(res.data.data);
+      })
       .catch(() =>
         setSnackbar({
           type: 'error',
@@ -44,6 +48,15 @@ const Index: FC<Props> = ({
         }),
       );
   }, [setSnackbar]);
+
+  useEffect(() => {
+    if (stores && storeId) {
+      const store = stores.find((s) => s.id.toString() === storeId);
+      if (store) {
+        setSelectedStore(store);
+      }
+    }
+  }, [storeId, stores, setSelectedStore]);
 
   return (
     stores && (
