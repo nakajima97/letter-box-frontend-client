@@ -24,7 +24,7 @@ type apiResponse = {
 };
 
 const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
-const defaultEmployeees = [defaultEmployee];
+const defaultEmployees = [defaultEmployee];
 
 const Index: FC<Props> = ({
   selectedStore,
@@ -32,7 +32,7 @@ const Index: FC<Props> = ({
   setSelectedEmployee,
   setSnackbar,
 }) => {
-  const [employees, setEmployees] = useState<employeeType[]>(defaultEmployeees);
+  const [employees, setEmployees] = useState<employeeType[]>(defaultEmployees);
 
   const history = useHistory();
 
@@ -56,7 +56,7 @@ const Index: FC<Props> = ({
           }),
         );
     } else {
-      setEmployees(defaultEmployeees);
+      setEmployees(defaultEmployees);
     }
   }, [selectedStore, setSnackbar]);
 
