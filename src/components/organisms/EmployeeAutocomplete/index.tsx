@@ -82,7 +82,7 @@ const Index: FC<Props> = ({
         />
       )}
       disabled={Number.isNaN(selectedStore?.id)}
-      onChange={(evnet, value) => {
+      onChange={(event, value) => {
         if (value && selectedStore) {
           history.push(`/message/${selectedStore.id}/${value.id}`);
           setSelectedEmployee(value);
