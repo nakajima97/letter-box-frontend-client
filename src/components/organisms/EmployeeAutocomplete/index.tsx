@@ -34,7 +34,11 @@ const Index: FC<Props> = ({
 }) => {
   const [employees, setEmployees] = useState<employeeType[]>(defaultEmployees);
 
-  const { employeeId }: { employeeId: string | undefined } = useParams();
+  const {
+    employeeId,
+    storeId,
+  }: { employeeId: string | undefined; storeId: string | undefined } =
+    useParams();
 
   const history = useHistory();
 
@@ -59,13 +63,32 @@ const Index: FC<Props> = ({
 
   // paramに設定された従業員IDを取得する
   useEffect(() => {
-    if (employees && employeeId) {
+    if (employeeId && employees) {
       const employee = employees.find((e) => e.id.toString() === employeeId);
       if (employee) {
         setSelectedEmployee(employee);
+      } else if (storeId) {
+        history.push(`/message/${storeId}`);
+        setSnackbar({
+          type: 'error',
+          text: '存在しない従業員IDがURLに設定されました',
+        });
+      } else {
+        history.push(`/`);
+        setSnackbar({
+          type: 'error',
+          text: '存在しない店舗IDがURLに設定されました',
+        });
       }
     }
-  }, [employees, employeeId, setSelectedEmployee]);
+  }, [
+    employees,
+    employeeId,
+    setSelectedEmployee,
+    storeId,
+    history,
+    setSnackbar,
+  ]);
 
   return (
     <Autocomplete
