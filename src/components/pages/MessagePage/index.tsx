@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import MessageTemplate from '../../templates/MessageTemplate';
 import { storeType } from '../../../types/Store';
 import { employeeType } from '../../../types/Employee';
-import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
+import { snackbarType, defaultSnackbar } from '../../../types/Snackbar';
 
 const defaultStore = { id: NaN, name: '' };
 const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
@@ -16,7 +16,7 @@ const Index: FC = () => {
     defaultEmployee,
   );
   const [message, setMessage] = useState('');
-  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnakbar);
+  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnackbar);
 
   const clearForm = () => {
     setSelectedStore(defaultStore);

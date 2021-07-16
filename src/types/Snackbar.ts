@@ -3,7 +3,7 @@ export type snackbarType = {
   text: string | undefined;
 };
 
-export const defaultSnakbar: snackbarType = {
+export const defaultSnackbar: snackbarType = {
   type: undefined,
   text: undefined,
 };

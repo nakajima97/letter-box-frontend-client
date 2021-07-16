@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Snackbar } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
 
-import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
+import { snackbarType, defaultSnackbar } from '../../../types/Snackbar';
 
 type Props = {
   snackbar: snackbarType;
@@ -11,7 +11,7 @@ type Props = {
 
 const Index: FC<Props> = ({ snackbar, setSnackbar }) => {
   const handleClose = () => {
-    setSnackbar(defaultSnakbar);
+    setSnackbar(defaultSnackbar);
   };
 
   return (
