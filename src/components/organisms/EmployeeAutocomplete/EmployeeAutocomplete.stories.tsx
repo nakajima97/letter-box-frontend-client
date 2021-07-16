@@ -7,7 +7,7 @@ import Index from '.';
 import responseData from './MockAPIServerResponseData';
 import { storeType } from '../../../types/Store';
 import { employeeType } from '../../../types/Employee';
-import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
+import { snackbarType, defaultSnackbar } from '../../../types/Snackbar';
 
 export default {
   component: Index,
@@ -31,7 +31,7 @@ export const Default: FC = () => {
     null,
   );
   // eslint-disable-next-line
-  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnakbar);
+  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnackbar);
 
   const mock = new MockAdapter(axios);
 

@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 
 import Index from './index';
-import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
+import { snackbarType, defaultSnackbar } from '../../../types/Snackbar';
 
 export default {
   component: Index,
@@ -10,7 +10,7 @@ export default {
 
 export const Default: FC = () => {
   // eslint-disable-next-line
-  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnakbar);
+  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnackbar);
 
   return (
     <>

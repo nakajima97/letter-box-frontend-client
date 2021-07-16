@@ -2,18 +2,25 @@ import { FC, useState } from 'react';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import { BrowserRouter as Router } from 'react-router-dom';
+import { QueryClientProvider, QueryClient } from 'react-query';
 
 import Index from '.';
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
-import { snackbarType, defaultSnakbar } from '../../../types/Snackbar';
+import { snackbarType, defaultSnackbar } from '../../../types/Snackbar';
 import responseData from './MockApiServerResponseData';
+
+const queryClient = new QueryClient();
 
 export default {
   component: Index,
   title: 'molecules/StoreSelectAutocomplete',
   decorators: [
-    (story: () => JSX.Element): JSX.Element => <Router>{story()}</Router>,
+    (story: () => JSX.Element): JSX.Element => (
+      <QueryClientProvider client={queryClient}>
+        <Router>{story()}</Router>
+      </QueryClientProvider>
+    ),
   ],
 };
 
@@ -29,7 +36,7 @@ export const Default: FC = () => {
     defaultEmployee,
   );
   // eslint-disable-next-line
-  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnakbar);
+  const [snackbar, setSnackbar] = useState<snackbarType>(defaultSnackbar);
 
   mock
     .onGet('http://localhost:3000/api/v1/stores?count=50')

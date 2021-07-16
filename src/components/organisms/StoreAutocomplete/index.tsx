@@ -3,6 +3,7 @@ import { TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import axios from 'axios';
 import { useHistory, useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
 import { employeeType } from '../../../types/Employee';
 import { storeType } from '../../../types/Store';
@@ -30,24 +31,33 @@ const Index: FC<Props> = ({
   setSnackbar,
 }) => {
   const [stores, setStores] = useState<storeType[] | null>(null);
+  const [keyword, setKeyword] = useState('');
 
   const history = useHistory();
 
   const { storeId }: { storeId: string | undefined } = useParams();
 
-  useEffect(() => {
+  const { data } = useQuery(['getStores', { keyword }], () =>
     axios
-      .get<apiResponse>(`http://localhost:3000/api/v1/stores?count=50`)
-      .then((res) => {
-        setStores(res.data.data);
-      })
+      .get<apiResponse>(
+        keyword
+          ? `http://localhost:3000/api/v1/stores/search?keyword=${keyword}`
+          : 'http://localhost:3000/api/v1/stores?count=100',
+      )
+      .then((res) => res.data.data)
       .catch(() =>
         setSnackbar({
           type: 'error',
           text: '店舗一覧の取得に失敗しました。時間をおいてアクセスしてください。',
         }),
-      );
-  }, [setSnackbar]);
+      ),
+  );
+
+  useEffect(() => {
+    if (data) {
+      setStores(data);
+    }
+  }, [data]);
 
   useEffect(() => {
     if (stores && storeId) {
@@ -62,7 +72,8 @@ const Index: FC<Props> = ({
         });
       }
     }
-  }, [storeId, stores, setSelectedStore, history, setSnackbar]);
+    // eslint-disable-next-line
+  }, [storeId]);
 
   return (
     stores && (
@@ -76,6 +87,8 @@ const Index: FC<Props> = ({
             {...params}
             label="店名"
             variant="standard"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
           />
         )}
         onChange={(event, value) => {
