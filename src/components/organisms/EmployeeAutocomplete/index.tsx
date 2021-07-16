@@ -46,7 +46,6 @@ const Index: FC<Props> = ({
           `http://localhost:3000/api/v1/employees/search?store_id=${selectedStore.id}`,
         )
         .then((res) => setEmployees(res.data.employees))
-        // eslint-disable-next-line
         .catch(() =>
           setSnackbar({
             type: 'error',
