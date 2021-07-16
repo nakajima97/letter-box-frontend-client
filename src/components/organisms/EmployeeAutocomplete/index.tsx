@@ -40,6 +40,7 @@ const Index: FC<Props> = ({
   // eslint-disable-next-line
   console.log({ employeeId });
 
+  // 従業員一覧を取得する
   useEffect(() => {
     if (selectedStore?.id) {
       axios
@@ -59,6 +60,7 @@ const Index: FC<Props> = ({
     }
   }, [selectedStore, setSnackbar]);
 
+  // paramに設定された従業員IDを取得する
   useEffect(() => {
     // eslint-disable-next-line
     console.log({ employeeId });
