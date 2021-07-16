@@ -34,9 +34,9 @@ const Index: FC<Props> = ({
 }) => {
   const [employees, setEmployees] = useState<employeeType[]>(defaultEmployees);
 
-  const history = useHistory();
-
   const { employeeId }: { employeeId: string | undefined } = useParams();
+
+  const history = useHistory();
 
   // 従業員一覧を取得する
   useEffect(() => {
