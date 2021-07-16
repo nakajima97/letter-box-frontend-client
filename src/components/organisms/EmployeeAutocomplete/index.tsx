@@ -61,7 +61,7 @@ const Index: FC<Props> = ({
     }
   }, [selectedStore, setSnackbar]);
 
-  // paramに設定された従業員IDを取得する
+  // paramに設定された従業員IDをもとに従業員検索をする
   useEffect(() => {
     if (employeeId && employees) {
       const employee = employees.find((e) => e.id.toString() === employeeId);
@@ -104,7 +104,7 @@ const Index: FC<Props> = ({
           variant="standard"
         />
       )}
-      disabled={Number.isNaN(selectedStore?.id)}
+      disabled={selectedStore ? Number.isNaN(selectedStore.id) : true}
       onChange={(event, value) => {
         if (value && selectedStore) {
           history.push(`/message/${selectedStore.id}/${value.id}`);
