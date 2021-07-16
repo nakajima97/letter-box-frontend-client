@@ -54,9 +54,11 @@ const Index: FC<Props> = ({
       const store = stores.find((s) => s.id.toString() === storeId);
       if (store) {
         setSelectedStore(store);
+      } else {
+        history.push('/');
       }
     }
-  }, [storeId, stores, setSelectedStore]);
+  }, [storeId, stores, setSelectedStore, history]);
 
   return (
     stores && (
