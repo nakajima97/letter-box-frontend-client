@@ -37,25 +37,20 @@ const Index: FC<Props> = ({
 
   const { storeId }: { storeId: string | undefined } = useParams();
 
-  const useQueryOptions = {};
-
-  const { data } = useQuery(
-    ['getStores', { keyword }],
-    () =>
-      axios
-        .get<apiResponse>(
-          keyword
-            ? `http://localhost:3000/api/v1/stores/search?keyword=${keyword}`
-            : 'http://localhost:3000/api/v1/stores?count=100',
-        )
-        .then((res) => res.data.data)
-        .catch(() =>
-          setSnackbar({
-            type: 'error',
-            text: '店舗一覧の取得に失敗しました。時間をおいてアクセスしてください。',
-          }),
-        ),
-    useQueryOptions,
+  const { data } = useQuery(['getStores', { keyword }], () =>
+    axios
+      .get<apiResponse>(
+        keyword
+          ? `http://localhost:3000/api/v1/stores/search?keyword=${keyword}`
+          : 'http://localhost:3000/api/v1/stores?count=100',
+      )
+      .then((res) => res.data.data)
+      .catch(() =>
+        setSnackbar({
+          type: 'error',
+          text: '店舗一覧の取得に失敗しました。時間をおいてアクセスしてください。',
+        }),
+      ),
   );
 
   useEffect(() => {
