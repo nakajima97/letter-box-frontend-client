@@ -24,7 +24,7 @@ type apiResponse = {
 };
 
 const defaultEmployee = { id: NaN, first_name: '', last_name: '' };
-const defaultEmployeees = [defaultEmployee];
+const defaultEmployees = [defaultEmployee];
 
 const Index: FC<Props> = ({
   selectedStore,
@@ -32,14 +32,17 @@ const Index: FC<Props> = ({
   setSelectedEmployee,
   setSnackbar,
 }) => {
-  const [employees, setEmployees] = useState<employeeType[]>(defaultEmployeees);
+  const [employees, setEmployees] = useState<employeeType[]>(defaultEmployees);
+
+  const {
+    employeeId,
+    storeId,
+  }: { employeeId: string | undefined; storeId: string | undefined } =
+    useParams();
 
   const history = useHistory();
 
-  const { employeeId }: { employeeId: string | undefined } = useParams();
-  // eslint-disable-next-line
-  console.log({ employeeId });
-
+  // 従業員一覧を取得する
   useEffect(() => {
     if (selectedStore?.id) {
       axios
@@ -47,7 +50,6 @@ const Index: FC<Props> = ({
           `http://localhost:3000/api/v1/employees/search?store_id=${selectedStore.id}`,
         )
         .then((res) => setEmployees(res.data.employees))
-        // eslint-disable-next-line
         .catch(() =>
           setSnackbar({
             type: 'error',
@@ -55,20 +57,38 @@ const Index: FC<Props> = ({
           }),
         );
     } else {
-      setEmployees(defaultEmployeees);
+      setEmployees(defaultEmployees);
     }
   }, [selectedStore, setSnackbar]);
 
+  // paramに設定された従業員IDを取得する
   useEffect(() => {
-    // eslint-disable-next-line
-    console.log({ employeeId });
-    if (employees && employeeId) {
+    if (employeeId && employees) {
       const employee = employees.find((e) => e.id.toString() === employeeId);
       if (employee) {
         setSelectedEmployee(employee);
+      } else if (storeId) {
+        history.push(`/message/${storeId}`);
+        setSnackbar({
+          type: 'error',
+          text: '存在しない従業員IDがURLに設定されました',
+        });
+      } else {
+        history.push(`/`);
+        setSnackbar({
+          type: 'error',
+          text: '存在しない店舗IDがURLに設定されました',
+        });
       }
     }
-  }, [employees, employeeId, setSelectedEmployee]);
+  }, [
+    employees,
+    employeeId,
+    setSelectedEmployee,
+    storeId,
+    history,
+    setSnackbar,
+  ]);
 
   return (
     <Autocomplete
@@ -85,7 +105,7 @@ const Index: FC<Props> = ({
         />
       )}
       disabled={Number.isNaN(selectedStore?.id)}
-      onChange={(evnet, value) => {
+      onChange={(event, value) => {
         if (value && selectedStore) {
           history.push(`/message/${selectedStore.id}/${value.id}`);
           setSelectedEmployee(value);

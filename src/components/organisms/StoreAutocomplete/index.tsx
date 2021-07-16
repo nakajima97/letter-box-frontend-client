@@ -54,9 +54,15 @@ const Index: FC<Props> = ({
       const store = stores.find((s) => s.id.toString() === storeId);
       if (store) {
         setSelectedStore(store);
+      } else {
+        history.push('/');
+        setSnackbar({
+          type: 'error',
+          text: '存在しない店舗IDがURLに設定されました',
+        });
       }
     }
-  }, [storeId, stores, setSelectedStore]);
+  }, [storeId, stores, setSelectedStore, history, setSnackbar]);
 
   return (
     stores && (
