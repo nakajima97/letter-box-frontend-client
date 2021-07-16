@@ -37,8 +37,6 @@ const Index: FC<Props> = ({
   const history = useHistory();
 
   const { employeeId }: { employeeId: string | undefined } = useParams();
-  // eslint-disable-next-line
-  console.log({ employeeId });
 
   // 従業員一覧を取得する
   useEffect(() => {
@@ -62,8 +60,6 @@ const Index: FC<Props> = ({
 
   // paramに設定された従業員IDを取得する
   useEffect(() => {
-    // eslint-disable-next-line
-    console.log({ employeeId });
     if (employees && employeeId) {
       const employee = employees.find((e) => e.id.toString() === employeeId);
       if (employee) {

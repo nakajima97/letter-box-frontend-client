@@ -34,13 +34,6 @@ const Index: FC<Props> = ({
       params.append('employee_id', employeeId.toString());
       params.append('message_text', message);
 
-      // eslint-disable-next-line
-      console.log({ storeId });
-      // eslint-disable-next-line
-      console.log({ employeeId });
-      // eslint-disable-next-line
-      console.log({ message });
-
       axios
         .post('http://localhost:3000/api/v1/messages', params)
         .then(() => {
