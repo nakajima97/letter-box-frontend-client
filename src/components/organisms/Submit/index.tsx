@@ -55,6 +55,7 @@ const Index: FC<Props> = ({
   return (
     <>
       <Button
+        className="submit"
         css={style}
         variant="contained"
         color="primary"
