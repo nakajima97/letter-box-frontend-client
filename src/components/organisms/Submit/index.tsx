@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { css } from '@emotion/react';
 import { Button } from '@material-ui/core';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import { snackbarType } from '../../../types/Snackbar';
 
@@ -27,6 +28,8 @@ const Index: FC<Props> = ({
 }) => {
   const isSendable = () => !!(storeId && employeeId && message);
 
+  const history = useHistory();
+
   const submitMessage = () => {
     if (storeId && employeeId && message) {
       const params = new URLSearchParams();
@@ -41,6 +44,7 @@ const Index: FC<Props> = ({
             type: 'success',
             text: 'メッセージを送信しました！！',
           });
+          history.push('/');
           clearForm();
         })
         .catch(() => {
@@ -55,6 +59,7 @@ const Index: FC<Props> = ({
   return (
     <>
       <Button
+        className="submit"
         css={style}
         variant="contained"
         color="primary"

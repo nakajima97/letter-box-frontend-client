@@ -15,6 +15,7 @@ const style = css`
 const Index: FC<Props> = ({ message, setMessage }) => (
   <>
     <TextField
+      className="message-form"
       css={style}
       label="メッセージ入力欄"
       helperText="感謝のメッセージを入れてください"

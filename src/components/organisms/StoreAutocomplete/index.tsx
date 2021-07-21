@@ -78,8 +78,8 @@ const Index: FC<Props> = ({
   return (
     stores && (
       <Autocomplete
+        className="stores-autocomplete"
         options={stores}
-        id="disable-close-on-select"
         getOptionLabel={(option) => option.name}
         renderInput={(params) => (
           <TextField

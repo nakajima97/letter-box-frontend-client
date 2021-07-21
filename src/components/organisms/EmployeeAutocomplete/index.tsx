@@ -92,7 +92,7 @@ const Index: FC<Props> = ({
 
   return (
     <Autocomplete
-      id="disable-close-on-select"
+      className="employee-autocomplete"
       // disableCloseOnSelect
       options={employees}
       getOptionLabel={(option) => `${option.first_name} ${option.last_name}`}
