@@ -24,7 +24,7 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "BROWSER=none PORT=3001 react-scripts start",
+    "start": "BROWSER=none PORT=3001 react-scripts -r @cypress/instrument-cra start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -36,8 +36,10 @@
     "lint:style:fix": "stylelint --fix 'src/**/*.{css,less,sass,scss}'",
     "storybook": "BROWSER=none start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public",
-    "postinstall": "typesync",
-    "chromatic": "npx chromatic --project-token=abaa0b796073"
+    "cy:open": "NODE_PATH=src cypress open",
+    "cy:run": "NODE_PATH=src cypress run --headless",
+    "chromatic": "npx chromatic --project-token=abaa0b796073",
+    "postinstall": "typesync"
   },
   "eslintConfig": {
     "extends": [
@@ -68,6 +70,7 @@
     ]
   },
   "devDependencies": {
+    "@cypress/instrument-cra": "^1.4.0",
     "@storybook/addon-actions": "^6.3.4",
     "@storybook/addon-essentials": "^6.3.4",
     "@storybook/addon-links": "^6.3.4",
@@ -80,6 +83,7 @@
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "chromatic": "^5.9.2",
+    "cypress": "^8.0.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
