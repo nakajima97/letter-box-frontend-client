@@ -75,36 +75,38 @@ const Index: FC<Props> = ({
     // eslint-disable-next-line
   }, [storeId]);
 
-  return (
-    stores && (
-      <Autocomplete
-        className="stores-autocomplete"
-        options={stores}
-        getOptionLabel={(option) => option.name}
-        renderInput={(params) => (
-          <TextField
-            // eslint-disable-next-line
-            {...params}
-            label="店名"
-            variant="standard"
-            value={keyword}
-            onChange={(e) => setKeyword(e.target.value)}
-          />
-        )}
-        onChange={(event, value) => {
-          setSelectedStore(value ?? null);
+  const autocomplete = stores ? (
+    <Autocomplete
+      className="stores-autocomplete"
+      options={stores}
+      getOptionLabel={(option) => option.name}
+      renderInput={(params) => (
+        <TextField
+          // eslint-disable-next-line
+          {...params}
+          label="店名"
+          variant="standard"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+        />
+      )}
+      onChange={(event, value) => {
+        setSelectedStore(value ?? null);
+        setSelectedEmployee(defaultEmployee);
+        if (value) {
+          history.push(`/message/${value.id}`);
+        } else {
+          history.push(`/`);
           setSelectedEmployee(defaultEmployee);
-          if (value) {
-            history.push(`/message/${value.id}`);
-          } else {
-            history.push(`/`);
-            setSelectedEmployee(defaultEmployee);
-          }
-        }}
-        value={selectedStore}
-      />
-    )
+        }
+      }}
+      value={selectedStore}
+    />
+  ) : (
+    <TextField disabled label="店名" />
   );
+
+  return autocomplete;
 };
 
 export default Index;
