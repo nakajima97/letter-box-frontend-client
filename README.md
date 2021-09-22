@@ -47,6 +47,7 @@ https://github.com/yudai-nakajima/letter-box-api
 - Material UI
 - Emotion
 - React-Router-Dom
+- cypress
 
 # 機能一覧
 - メッセージ送信機能
