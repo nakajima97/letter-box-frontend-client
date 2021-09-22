@@ -13,17 +13,17 @@ Letter Box は以下4つのリポジトリで構成される
 
 ### 客側フロントエンド
 
-顧客がメッセージを伝える際に利用する画面  ※本リポジトリ
+顧客がメッセージを伝える際に利用する画面  ※本リポジトリ  
 https://github.com/yudai-nakajima/letter-box-frontend-client
 
 ### 管理画面フロントエンド
 
-従業員がメッセージを確認するための画面
+従業員がメッセージを確認するための画面  
 https://github.com/yudai-nakajima/letter-box-frontend-management
 
 ### バックエンド
 
-Letter Box のバックエンド
+Letter Box のバックエンド  
 フロントエンドは客側・管理画面と分かれるが、バックエンドは 1 つのみ  
 https://github.com/yudai-nakajima/letter-box-backend
 
